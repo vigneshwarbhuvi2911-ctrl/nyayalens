@@ -1,0 +1,143 @@
+# Review playbook: the checks NyayaLens runs for each document type.
+# Thresholds are configuration, so a legal team can tune them without changing code.
+# These are review prompts for a person, not legal advice.
+
+loan_agreement:
+  - id: L1
+    check: field_above
+    params: {field: interest_rate, limit: 18}
+    severity: high
+    title: High interest rate
+    why: "The interest rate of {interest_rate}% p.a. is above {limit}% p.a. Compare it with offers from other lenders."
+  - id: L2
+    check: field_above
+    params: {field: penal_rate_pa, limit: 24}
+    severity: high
+    title: Heavy penal interest
+    why: "Penal interest works out to {penal_rate_pa}% p.a. on overdue amounts, above {limit}% p.a."
+  - id: L3
+    check: field_above
+    params: {field: prepayment_charge, limit: 2}
+    severity: medium
+    title: High prepayment charge
+    why: "Closing the loan early costs {prepayment_charge}% of the outstanding principal."
+  - id: L4
+    check: clause_matches
+    params: {labels: [interest], pattern: "sole discretion|unilateral|as it may decide"}
+    severity: high
+    title: Lender can change the interest rate on its own
+    why: "The lender can revise the rate at its discretion, so the cost of the loan can rise during the tenure."
+  - id: L5
+    check: clause_matches
+    params: {labels: [set_off], pattern: "without (?:prior )?notice"}
+    severity: medium
+    title: Set-off without notice
+    why: "The lender can take money from the borrower's other accounts without telling them first."
+  - id: L6
+    check: clause_missing
+    params: {label: prepayment}
+    severity: low
+    title: No prepayment clause
+    why: "The agreement does not say whether, or at what cost, the loan can be closed early."
+  - id: L7
+    check: clause_matches
+    params: {labels: [disputes], pattern: "arbitrator appointed by the (?:Lender|Bank|Company)"}
+    severity: medium
+    title: Arbitrator chosen by one side only
+    why: "Only the lender appoints the arbitrator. A sole arbitrator appointed by one party alone may be challenged as not independent."
+
+rent_agreement:
+  - id: R1
+    check: field_above
+    params: {field: deposit_months, limit: 6, high_limit: 10}
+    severity: medium
+    title: Large security deposit
+    why: "The deposit equals {deposit_months} months of rent, more than {limit} months."
+  - id: R2
+    check: field_above
+    params: {field: lock_in_months, limit: 12}
+    severity: medium
+    title: Long lock-in period
+    why: "The tenancy cannot be ended for {lock_in_months} months."
+  - id: R3
+    check: field_above
+    params: {field: escalation_pct, limit: 10}
+    severity: medium
+    title: Steep rent increase
+    why: "Rent goes up by {escalation_pct}% at each revision, above {limit}%."
+  - id: R4
+    check: one_sided_termination
+    params: {}
+    severity: high
+    title: One-sided termination rights
+    why: "The landlord can end the agreement on terms that the tenant does not get."
+  - id: R5
+    check: field_above
+    params: {field: notice_days, limit: 90}
+    severity: low
+    title: Long notice period
+    why: "A notice period of {notice_days} days is required to terminate."
+  - id: R6
+    check: field_missing_if_clause
+    params: {field: deposit_refund_days, label: deposit}
+    severity: medium
+    title: No deadline to refund the deposit
+    why: "The agreement does not say within how many days the deposit must be returned."
+  - id: R7
+    check: clause_missing
+    params: {label: maintenance}
+    severity: low
+    title: Repairs and maintenance not covered
+    why: "Nothing says who pays for repairs, maintenance charges and utilities."
+
+nda:
+  - id: N1
+    check: field_above
+    params: {field: non_compete_months, limit: 12}
+    severity: high
+    title: Long restriction after the engagement
+    why: "A {non_compete_months}-month restriction applies after the engagement ends. Restraints on working after a contract ends are generally unenforceable in India under Section 27 of the Indian Contract Act, 1872, but they can still lead to disputes."
+  - id: N2
+    check: field_equals
+    params: {field: confidentiality, value: perpetual}
+    severity: medium
+    title: Confidentiality never ends
+    why: "The confidentiality obligations have no end date."
+  - id: N4
+    check: uncapped_indemnity
+    params: {}
+    severity: high
+    title: Unlimited indemnity
+    why: "There is an indemnity for all losses and no clause limiting liability."
+  - id: N5
+    check: clause_missing
+    params: {label: disputes}
+    severity: medium
+    title: No governing law or jurisdiction
+    why: "The agreement does not say which law applies or where disputes will be decided."
+
+legal_notice:
+  - id: D1
+    check: field_below
+    params: {field: compliance_days, limit: 15}
+    severity: high
+    title: Very short deadline
+    why: "Only {compliance_days} days are given to comply. Act quickly and consult an advocate."
+  - id: D2
+    check: deadline_passed
+    params: {}
+    severity: high
+    title: Deadline may have passed
+    why: "Counting from the notice date, the deadline was {deadline}. Check the date of receipt and take advice immediately."
+  - id: D3
+    check: text_matches
+    params: {pattern: "criminal|Section 138"}
+    severity: high
+    title: Criminal proceedings threatened
+    why: "The notice threatens criminal proceedings (for example, cheque dishonour under Section 138 of the Negotiable Instruments Act). These have strict timelines."
+  - id: D4
+    check: field_above
+    params: {field: interest_claimed, limit: 18}
+    severity: medium
+    title: High interest claimed
+    why: "Interest of {interest_claimed}% p.a. is claimed. Check whether it was actually agreed."

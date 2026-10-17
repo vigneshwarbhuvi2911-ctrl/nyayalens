@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NyayaLens</title>
+<style>
+:root{
+  --paper:#f7f3ec; --panel:#fffdf9; --ink:#1f1a17; --muted:#6b6259; --line:#e4dccf;
+  --brand:#5b2333; --brand-2:#f3e6e9; --gold:#a8742a; --chip:#efe9df;
+  --high:#9f1d1d; --high-bg:#fbe9e7; --med:#9a5b00; --med-bg:#fdf1dc; --low:#3f5d7a; --low-bg:#e8eff6;
+  --ok:#2f6b3a; --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--panel)}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font:700 18px var(--serif)}
+h1{font:600 21px var(--serif);margin:0}
+header small{color:var(--muted);display:block;font-size:12.5px}
+.layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;max-width:1240px;margin:0 auto;padding:20px}
+aside{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+h3{font:600 12px/1 inherit;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.drop{display:block;border:1.5px dashed #cdbfa9;border-radius:12px;padding:18px;text-align:center;color:var(--muted);cursor:pointer;background:#fffaf2}
+.drop.over{border-color:var(--brand);background:var(--brand-2)}
+.drop b{color:var(--brand)}
+.list button{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:0;background:none;padding:7px 8px;border-radius:8px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+.list button:hover{background:var(--chip)}
+.list span{font-size:11.5px;color:var(--muted)}
+main{min-width:0}
+.empty{color:var(--muted);text-align:center;padding:70px 20px}
+.empty h2{font:600 26px var(--serif);color:var(--ink);margin:0 0 8px}
+.dochead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:14px}
+.dochead h2{font:600 24px var(--serif);margin:0}
+.badge{font-size:12px;border-radius:999px;padding:2px 10px;background:var(--chip);color:var(--muted)}
+.badge.type{background:var(--brand-2);color:var(--brand);font-weight:600}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:9px 14px;font:inherit;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button.on{color:var(--brand);border-color:var(--brand);font-weight:600}
+.tabs .count{background:var(--high);color:#fff;border-radius:999px;font-size:11px;padding:0 6px;margin-left:4px}
+.pane{display:none}.pane.on{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ul.summary{margin:0;padding-left:18px}ul.summary li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600}
+td.k{color:var(--muted);width:42%}
+.q{display:block;color:var(--muted);font-size:12.5px;margin-top:2px;font-style:italic}
+.ref{font:600 11.5px ui-monospace,Menlo,monospace;color:var(--brand);background:var(--brand-2);border-radius:5px;padding:1px 6px;white-space:nowrap}
+.llm{font-size:10.5px;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 4px;margin-left:4px}
+.risk{border-left:4px solid;border-radius:10px;padding:12px 14px;margin-bottom:10px;background:var(--panel);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.risk.high{border-left-color:var(--high)}.risk.medium{border-left-color:var(--med)}.risk.low{border-left-color:var(--low)}
+.sev{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:5px;padding:1px 7px;margin-right:8px}
+.sev.high{background:var(--high-bg);color:var(--high)}.sev.medium{background:var(--med-bg);color:var(--med)}.sev.low{background:var(--low-bg);color:var(--low)}
+.risk b{font-weight:600}
+.risk p{margin:6px 0 4px}
+blockquote{margin:6px 0 0;padding:6px 10px;border-left:2px solid var(--line);color:var(--muted);font-size:13.5px;font-family:var(--serif)}
+.ok{color:var(--ok)}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.tl .d{font:600 14px ui-monospace,Menlo,monospace;min-width:104px}
+.tl li.deadline .d{color:var(--high)}
+.tl li.past{opacity:.6}
+.clause{border-bottom:1px solid var(--line);padding:10px 0}
+.clause summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.clause .lab{font-size:12px;background:var(--chip);border-radius:6px;padding:1px 8px}
+.clause .conf{font-size:11.5px;color:var(--muted)}
+.clause p{font-family:var(--serif);margin:8px 0 0;white-space:pre-wrap}
+form.row{display:flex;gap:8px}
+input,textarea,select{font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;color:var(--ink);width:100%}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:0 16px;font:600 14px inherit;cursor:pointer;min-height:40px;white-space:nowrap}
+.btn.ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+.btn:disabled{opacity:.5}
+.qa{margin-top:12px}
+.qa .a{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.qa .a .qq{font-weight:600;margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+.diff .del{background:#fbe0dd;text-decoration:line-through;color:#7a1d1d}
+.diff .add{background:#dff2e1;color:#1f5a2a}
+.diff{font-family:var(--serif);line-height:1.7}
+pre.draft{white-space:pre-wrap;font:14.5px/1.6 var(--serif);background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0 0}
+.note{font-size:12.5px;color:var(--muted)}
+footer{max-width:1240px;margin:0 auto;padding:0 20px 24px;color:var(--muted);font-size:12.5px}
+@media (max-width:880px){.layout{grid-template-columns:1fr;padding:12px}.grid2{grid-template-columns:1fr}header{padding:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">न</div>
+  <div><h1>NyayaLens</h1><small>Legal document analysis · loan agreements, rent agreements, NDAs, legal notices</small></div>
+</header>
+<div class="layout">
+  <aside>
+    <div class="card">
+      <h3>Analyse a document</h3>
+      <label class="drop" id="drop"><b>Choose a file</b> or drop it here<br><span class="note">PDF, scanned PDF, image, DOCX or TXT</span>
+        <input type="file" id="file" hidden accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg"></label>
+    </div>
+    <div class="card"><h3>Sample documents (synthetic)</h3><div class="list" id="samples"></div></div>
+    <div class="card"><h3>Recent</h3><div class="list" id="recent"><span class="note">Nothing yet</span></div></div>
+  </aside>
+  <main id="main">
+    <div class="card empty"><h2>Upload a legal document</h2>NyayaLens finds the parties, money terms and dates, flags risky or missing clauses with the exact clause quoted, answers questions, compares versions and drafts replies to legal notices.</div>
+  </main>
+</div>
+<footer>NyayaLens highlights points for review. It is not legal advice; consult an advocate before acting. All sample documents are fictional.</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let cur=null;
+const api=async(p,o={})=>{const r=await fetch(p,o); if(!r.ok) throw new Error((await r.json().catch(()=>({}))).detail||r.status); return r.json();};
+const SUGGEST={loan_agreement:["What is the interest rate?","Can I close the loan early?","What happens if I miss an EMI?"],
+  rent_agreement:["How much is the deposit?","How much notice do I need to give?","By how much will the rent go up?"],
+  nda:["How long does confidentiality last?","Can I work for a competitor?","Which court has jurisdiction?"],
+  legal_notice:["How much am I asked to pay?","By when do I have to pay?","What happens if I don't pay?"]};
+const fmtDate=s=>{const d=new Date(s+"T00:00:00");return d.toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});};
+
+async function loadLists(){
+  const s=await api("/samples");
+  $("#samples").innerHTML=s.map(n=>`<button data-s="${esc(n)}">${esc(n.replace(".txt",""))}<span>sample</span></button>`).join("");
+  document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>run(()=>api(`/samples/${b.dataset.s}/analyze`,{method:"POST"})));
+  const r=await api("/analyses");
+  if(r.length) $("#recent").innerHTML=r.slice(0,8).map(x=>`<button data-r="${esc(x.id)}">${esc(x.filename)}<span>${esc(x.doc_type.replace("_"," "))}</span></button>`).join("");
+  document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>run(()=>api(`/analyses/${b.dataset.r}`)));
+}
+async function run(fn){
+  $("#main").innerHTML=`<div class="card empty">Reading the document…</div>`;
+  try{cur=await fn(); render(); loadLists();}catch(e){$("#main").innerHTML=`<div class="card empty">Could not analyse: ${esc(e.message)}</div>`;}
+}
+const fileIn=$("#file"), drop=$("#drop");
+fileIn.onchange=()=>fileIn.files[0]&&upload(fileIn.files[0]);
+drop.ondragover=e=>{e.preventDefault();drop.classList.add("over");};
+drop.ondragleave=()=>drop.classList.remove("over");
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");e.dataTransfer.files[0]&&upload(e.dataTransfer.files[0]);};
+function upload(f){const fd=new FormData();fd.append("file",f);run(()=>api("/analyze",{method:"POST",body:fd}));}
+
+function render(){
+  const r=cur, high=r.risks.filter(x=>x.severity==="high").length;
+  const isNotice=r.doc_type==="legal_notice";
+  $("#main").innerHTML=`
+  <div class="dochead"><h2>${esc(r.filename)}</h2><span class="badge type">${esc(r.doc_type_name)}</span>
+    <span class="badge" title="classifier confidence">${Math.round(r.doc_type_confidence*100)}% confident</span>
+    ${r.ocr?`<span class="badge">read with OCR</span>`:""}${r.summary_source==="llm"?`<span class="badge">AI summary</span>`:""}</div>
+  <div class="tabs">
+    <button data-t="overview" class="on">Overview</button>
+    <button data-t="risks">Risks${r.risks.length?`<span class="count">${r.risks.length}</span>`:""}</button>
+    <button data-t="clauses">Clauses</button><button data-t="ask">Ask</button><button data-t="compare">Compare</button>
+    ${isNotice?`<button data-t="reply">Draft reply</button>`:""}
+  </div>
+  <div class="pane on" id="t-overview">${overview(r)}</div>
+  <div class="pane" id="t-risks">${risks(r)}</div>
+  <div class="pane" id="t-clauses">${clauses(r)}</div>
+  <div class="pane" id="t-ask">${ask(r)}</div>
+  <div class="pane" id="t-compare"><div class="card"><h3>Compare with an earlier version</h3><p class="note">Shows what changed from the version you pick to this document.</p><form class="row" id="cmpf"><select id="cmpsel"></select><button class="btn">Compare</button></form><div id="cmpout"></div></div></div>
+  ${isNotice?`<div class="pane" id="t-reply"><div class="card"><h3>Draft a reply</h3><textarea id="instr" rows="3" placeholder="Your instructions, e.g. 'Client admits the principal but disputes the interest; asks for 60 days to pay'"></textarea><div style="margin-top:8px"><button class="btn" id="draftb">Draft reply</button></div><div id="draftout"></div></div></div>`:""}`;
+  document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
+    document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
+    document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id==="t-"+b.dataset.t));
+    if(b.dataset.t==="compare") fillCompare();});
+  wireAsk(); $("#cmpf").onsubmit=e=>{e.preventDefault();doCompare();};
+  if(isNotice) $("#draftb").onclick=draft;
+}
+function overview(r){
+  const parties=r.parties.length?r.parties.map(p=>`<tr><td class="k">${esc(p.role)}</td><td>${esc(p.name)}</td></tr>`).join(""):"";
+  const fields=Object.entries(r.fields).map(([k,f])=>`<tr><td class="k">${esc(f.label)}</td><td>${esc(f.display)}${f.source==="llm"?`<span class="llm">AI</span>`:""}
+     ${f.clause?` <span class="ref">${esc(f.clause)}</span>`:""}${f.quote?`<span class="q">“${esc(f.quote)}”</span>`:""}</td></tr>`).join("");
+  const missing=r.missing_fields.length?`<p class="note">Not stated in the document: ${r.missing_fields.map(esc).join(", ").replace(/_/g," ")}</p>`:"";
+  const tl=r.timeline.length?`<ul class="tl">${r.timeline.map(e=>`<li class="${e.kind} ${e.past?"past":""}"><span class="d">${fmtDate(e.date)}</span><span><b>${esc(e.label)}</b>${e.past?" (past)":""}<span class="q">${esc(e.basis)}</span></span></li>`).join("")}</ul>
+     <p><a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="/analyses/${r.id}/calendar.ics">Add to calendar (.ics)</a></p>`:`<p class="note">No dates to track.</p>`;
+  const top=r.risks.length?`<p><b>${r.risks.length} point${r.risks.length>1?"s":""} to review</b>: ${r.risks.slice(0,3).map(x=>`<span class="sev ${x.severity}">${x.severity}</span>${esc(x.title)}`).join(" · ")}</p>`:`<p class="ok">No issues found by the review checklist.</p>`;
+  return `<div class="grid2"><div class="card"><h3>Summary</h3><ul class="summary">${r.summary.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>${top}</div>
+    <div class="card"><h3>Key dates</h3>${tl}</div></div>
+    <div class="card" style="margin-top:16px"><h3>Key terms</h3><table>${parties}${fields}</table>${missing}</div>`;
+}
+function risks(r){
+  if(!r.risks.length) return `<div class="card ok">No issues found by the review checklist for this document type.</div>`;
+  return r.risks.map(x=>`<div class="risk ${x.severity}"><span class="sev ${x.severity}">${x.severity}</span><b>${esc(x.title)}</b>${x.clause?` <span class="ref">${esc(x.clause)}</span>`:""}
+    <p>${esc(x.why)}</p>${x.quote?`<blockquote>${esc(x.quote)}</blockquote>`:""}</div>`).join("")+`<p class="note">${esc(r.disclaimer)}</p>`;
+}
+function clauses(r){
+  return `<div class="card">${r.clauses.map(c=>`<details class="clause"><summary><span class="ref">${esc(c.ref)}</span><b>${esc(c.heading||"")}</b>
+   ${c.label?`<span class="lab">${esc(c.label.replace(/_/g," "))}</span>`:""}${c.confidence?`<span class="conf">${Math.round(c.confidence*100)}%</span>`:""}</summary><p>${esc(c.text)}</p></details>`).join("")}</div>`;
+}
+function ask(r){
+  return `<div class="card"><h3>Ask about this document</h3><div class="chips">${(SUGGEST[r.doc_type]||[]).map(s=>`<button type="button">${esc(s)}</button>`).join("")}</div>
+   <form class="row" id="askf"><input id="askq" placeholder="Type a question…" maxlength="500"><button class="btn">Ask</button></form><div class="qa" id="qa"></div></div>`;
+}
+function wireAsk(){
+  const go=async q=>{if(!q)return; const box=document.createElement("div");box.className="a";box.innerHTML=`<div class="qq">${esc(q)}</div>…`;$("#qa").prepend(box);
+    try{const a=await api(`/analyses/${cur.id}/ask`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q})});
+      box.innerHTML=`<div class="qq">${esc(q)}</div>${esc(a.answer)} ${a.citations.map(c=>`<span class="ref">${esc(c.clause)}</span>`).join(" ")}${a.citations.map(c=>`<blockquote>${esc(c.quote)}</blockquote>`).join("")}`;}
+    catch(e){box.innerHTML=`<div class="qq">${esc(q)}</div>Error: ${esc(e.message)}`;}};
+  $("#askf").onsubmit=e=>{e.preventDefault();go($("#askq").value.trim());$("#askq").value="";};
+  document.querySelectorAll(".chips button").forEach(b=>b.onclick=()=>go(b.textContent));
+}
+async function fillCompare(){
+  const r=await api("/analyses"); const opts=r.filter(x=>x.id!==cur.id);
+  $("#cmpsel").innerHTML=opts.length?opts.map(x=>`<option value="${esc(x.id)}">${esc(x.filename)} (${esc(x.doc_type.replace("_"," "))})</option>`).join(""):`<option value="">Analyse another version first</option>`;
+}
+async function doCompare(){
+  const b=$("#cmpsel").value; if(!b) return;
+  const c=await api(`/compare?a=${b}&b=${cur.id}`);   // selected version -> this document
+  const f=c.field_changes.length?`<table><tr><th>Term</th><th>${esc(c.a.filename)}</th><th>${esc(c.b.filename)}</th></tr>${c.field_changes.map(x=>`<tr><td>${esc(x.label)}</td><td>${esc(x.before??"-")}</td><td><b>${esc(x.after??"-")}</b></td></tr>`).join("")}</table>`:`<p class="note">No change in key terms.</p>`;
+  const rk=[...c.new_risks.map(x=>`<div class="risk ${x.severity}"><span class="sev ${x.severity}">new</span><b>${esc(x.title)}</b><p>${esc(x.why)}</p></div>`),
+            ...c.changed_risks.map(x=>`<div class="risk ${x.severity}"><span class="sev ${x.severity}">now ${x.severity}</span><b>${esc(x.title)}</b><p>${esc(x.why)}</p></div>`),
+            ...c.resolved_risks.map(x=>`<div class="risk low"><span class="sev low">resolved</span><b>${esc(x.title)}</b></div>`)].join("");
+  const cl=c.clause_changes.map(x=>`<div class="clause"><b>${esc(x.label.replace(/_/g," "))}</b> <span class="note">${esc(x.status)}</span>
+     <div class="diff">${x.diff.map(d=>d.op==="same"?esc(d.text):`<span class="${d.op}">${esc(d.text)}</span>`).join(" ")}</div></div>`).join("");
+  $("#cmpout").innerHTML=`${c.same_type?"":`<p class="note">These are different document types.</p>`}<h3 style="margin-top:16px">Key terms</h3>${f}<h3 style="margin-top:16px">Risks</h3>${rk||`<p class="note">No change in risks.</p>`}<h3 style="margin-top:16px">Changed clauses</h3>${cl||`<p class="note">No clause changes.</p>`}`;
+}
+async function draft(){
+  $("#draftb").disabled=true;
+  try{const d=await api(`/analyses/${cur.id}/reply`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({instructions:$("#instr").value})});
+    $("#draftout").innerHTML=`${d.warnings.map(w=>`<p class="note">${esc(w)}</p>`).join("")}<pre class="draft" id="dtext">${esc(d.draft)}</pre><button class="btn ghost" id="copyb" style="margin-top:8px">Copy</button>`;
+    $("#copyb").onclick=()=>navigator.clipboard.writeText($("#dtext").textContent);}
+  finally{$("#draftb").disabled=false;}
+}
+loadLists();
+</script>
+</body>
+</html>

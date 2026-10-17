@@ -1,0 +1,17 @@
+services:
+  nyayalens:
+    build:
+      context: .
+      args:
+        WITH_BEDROCK: ${WITH_BEDROCK:-false}
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      NYAYALENS_DB: /app/var/nyayalens.db
+    volumes:
+      - nyayalens-data:/app/var
+volumes:
+  nyayalens-data:

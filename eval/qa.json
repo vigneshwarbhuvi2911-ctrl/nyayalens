@@ -1,0 +1,182 @@
+[
+ {
+  "doc": "LOAN-1",
+  "question": "What is the interest rate?",
+  "clause": "clause 3",
+  "facts": [
+   "21%"
+  ]
+ },
+ {
+  "doc": "LOAN-1",
+  "question": "Can I repay the loan early, and what does it cost?",
+  "clause": "clause 5",
+  "facts": [
+   "4%"
+  ]
+ },
+ {
+  "doc": "LOAN-1",
+  "question": "What happens if I miss an EMI?",
+  "clause": "clause 6",
+  "facts": [
+   "3% per month"
+  ]
+ },
+ {
+  "doc": "LOAN-1",
+  "question": "How much is each EMI?",
+  "clause": "clause 4",
+  "facts": [
+   "18,838"
+  ]
+ },
+ {
+  "doc": "LOAN-2",
+  "question": "Is there any charge for foreclosing the loan?",
+  "clause": "clause 4",
+  "facts": [
+   "without any prepayment charge"
+  ]
+ },
+ {
+  "doc": "LOAN-2",
+  "question": "What security has to be given?",
+  "clause": "clause 6",
+  "facts": [
+   "mortgage"
+  ]
+ },
+ {
+  "doc": "LOAN-3",
+  "question": "Can the lender take money from my other accounts?",
+  "clause": "clause 5",
+  "facts": [
+   "set off"
+  ]
+ },
+ {
+  "doc": "LOAN-3",
+  "question": "Who is the guarantor?",
+  "clause": "clause 6",
+  "facts": [
+   "G. Lakshmi"
+  ]
+ },
+ {
+  "doc": "RENT-1",
+  "question": "How much is the security deposit?",
+  "clause": "clause 3",
+  "facts": [
+   "2,50,000"
+  ]
+ },
+ {
+  "doc": "RENT-1",
+  "question": "Who pays for electricity and water?",
+  "clause": "clause 5",
+  "facts": [
+   "electricity"
+  ]
+ },
+ {
+  "doc": "RENT-1",
+  "question": "How much notice do I need to give to vacate?",
+  "clause": "clause 6",
+  "facts": [
+   "30 days"
+  ]
+ },
+ {
+  "doc": "RENT-2",
+  "question": "How long is the lock-in?",
+  "clause": "clause 1",
+  "facts": [
+   "24 months"
+  ]
+ },
+ {
+  "doc": "RENT-2",
+  "question": "By how much will the rent go up?",
+  "clause": "clause 4",
+  "facts": [
+   "15%"
+  ]
+ },
+ {
+  "doc": "RENT-3",
+  "question": "Who pays property tax?",
+  "clause": "clause 6",
+  "facts": [
+   "property tax"
+  ]
+ },
+ {
+  "doc": "NDA-1",
+  "question": "Which court has jurisdiction?",
+  "clause": "clause 8",
+  "facts": [
+   "Hyderabad"
+  ]
+ },
+ {
+  "doc": "NDA-1",
+  "question": "What is the maximum liability?",
+  "clause": "clause 7",
+  "facts": [
+   "25,00,000"
+  ]
+ },
+ {
+  "doc": "NDA-2",
+  "question": "Can I work for a competitor after the engagement?",
+  "clause": "clause 3",
+  "facts": [
+   "24 months"
+  ]
+ },
+ {
+  "doc": "NOTICE-1",
+  "question": "How much am I asked to pay?",
+  "clause": "clause 4",
+  "facts": [
+   "3,75,000"
+  ]
+ },
+ {
+  "doc": "NOTICE-1",
+  "question": "By when do I have to pay?",
+  "clause": "clause 4",
+  "facts": [
+   "7 days"
+  ]
+ },
+ {
+  "doc": "NOTICE-2",
+  "question": "What happens if I don't pay?",
+  "clause": "clause 4",
+  "facts": [
+   "criminal proceedings"
+  ]
+ },
+ {
+  "doc": "NOTICE-3",
+  "question": "What does my landlord want?",
+  "clause": "clause 3",
+  "facts": [
+   "vacant possession"
+  ]
+ },
+ {
+  "doc": "LOAN-1",
+  "question": "Does the loan include free insurance?",
+  "clause": null,
+  "facts": []
+ },
+ {
+  "doc": "RENT-1",
+  "question": "Can I keep a pet dog?",
+  "clause": null,
+  "facts": []
+ }
+]

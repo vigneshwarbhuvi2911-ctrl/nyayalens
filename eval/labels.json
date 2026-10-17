@@ -1,0 +1,379 @@
+{
+ "LOAN-1": {
+  "doc_type": "loan_agreement",
+  "clauses": [
+   "definitions",
+   "principal",
+   "interest",
+   "repayment",
+   "prepayment",
+   "penal_charges",
+   "default",
+   "disputes",
+   "notices"
+  ],
+  "parties": [
+   "Kaveri Finance Limited",
+   "Arun Prakash"
+  ],
+  "fields": {
+   "agreement_date": "2026-03-05",
+   "loan_amount": 500000,
+   "interest_rate": 21,
+   "tenure_months": 36,
+   "emi": 18838,
+   "first_emi_date": "2026-04-05",
+   "penal_rate_pa": 36,
+   "prepayment_charge": 4,
+   "dispute_city": "Chennai"
+  },
+  "risks": [
+   "L1",
+   "L2",
+   "L3",
+   "L4",
+   "L7"
+  ],
+  "timeline": {
+   "Last EMI due": "2029-03-05"
+  }
+ },
+ "LOAN-2": {
+  "doc_type": "loan_agreement",
+  "clauses": [
+   "principal",
+   "interest",
+   "repayment",
+   "prepayment",
+   "penal_charges",
+   "security",
+   "default",
+   "disputes",
+   "notices"
+  ],
+  "parties": [
+   "Nilgiri Housing Finance Limited",
+   "Meena Krishnan"
+  ],
+  "fields": {
+   "agreement_date": "2026-01-12",
+   "loan_amount": 4500000,
+   "interest_rate": 8.9,
+   "tenure_months": 240,
+   "emi": 40199,
+   "first_emi_date": "2026-02-10",
+   "penal_rate_pa": 2,
+   "prepayment_charge": 0,
+   "dispute_city": "Bengaluru"
+  },
+  "risks": [],
+  "timeline": {
+   "Last EMI due": "2046-01-10"
+  }
+ },
+ "LOAN-3": {
+  "doc_type": "loan_agreement",
+  "clauses": [
+   "principal",
+   "interest",
+   "repayment",
+   "penal_charges",
+   "set_off",
+   "security",
+   "default",
+   "disputes"
+  ],
+  "parties": [
+   "Vaigai Capital Private Limited",
+   "Sri Lakshmi Traders"
+  ],
+  "fields": {
+   "agreement_date": "2025-08-20",
+   "loan_amount": 1200000,
+   "interest_rate": 16.5,
+   "tenure_months": 24,
+   "emi": 59043,
+   "first_emi_date": "2025-09-20",
+   "penal_rate_pa": 30,
+   "prepayment_charge": null,
+   "dispute_city": "Madurai"
+  },
+  "risks": [
+   "L2",
+   "L5",
+   "L6"
+  ],
+  "timeline": {
+   "Last EMI due": "2027-08-20"
+  }
+ },
+ "RENT-1": {
+  "doc_type": "rent_agreement",
+  "clauses": [
+   "term",
+   "rent",
+   "deposit",
+   "escalation",
+   "maintenance",
+   "termination",
+   "use"
+  ],
+  "parties": [
+   "S. Ramasamy",
+   "Divya Nair"
+  ],
+  "fields": {
+   "agreement_date": "2026-05-25",
+   "start_date": "2026-06-01",
+   "term_months": 11,
+   "lock_in_months": 6,
+   "monthly_rent": 25000,
+   "deposit": 250000,
+   "deposit_months": 10,
+   "escalation_pct": 5,
+   "notice_days": 30,
+   "deposit_refund_days": 15,
+   "dispute_city": null
+  },
+  "risks": [
+   "R1"
+  ],
+  "timeline": {
+   "Lock-in period ends": "2026-12-01",
+   "Agreement expires": "2027-05-01"
+  }
+ },
+ "RENT-2": {
+  "doc_type": "rent_agreement",
+  "clauses": [
+   "term",
+   "rent",
+   "deposit",
+   "escalation",
+   "termination",
+   "use",
+   "disputes"
+  ],
+  "parties": [
+   "Harish Gowda",
+   "Karthik Iyer"
+  ],
+  "fields": {
+   "agreement_date": "2026-07-01",
+   "start_date": "2026-07-01",
+   "term_months": 36,
+   "lock_in_months": 24,
+   "monthly_rent": 40000,
+   "deposit": 400000,
+   "deposit_months": 10,
+   "escalation_pct": 15,
+   "notice_days": 90,
+   "deposit_refund_days": null,
+   "dispute_city": "Bengaluru"
+  },
+  "risks": [
+   "R1",
+   "R2",
+   "R3",
+   "R4",
+   "R6",
+   "R7"
+  ],
+  "timeline": {
+   "Lock-in period ends": "2028-07-01",
+   "Agreement expires": "2029-07-01"
+  }
+ },
+ "RENT-3": {
+  "doc_type": "rent_agreement",
+  "clauses": [
+   "property",
+   "term",
+   "rent",
+   "deposit",
+   "escalation",
+   "maintenance",
+   "termination",
+   "disputes"
+  ],
+  "parties": [
+   "Kongu Estates",
+   "Anbu Medicals"
+  ],
+  "fields": {
+   "agreement_date": "2026-04-15",
+   "start_date": "2026-05-01",
+   "term_months": 36,
+   "lock_in_months": 12,
+   "monthly_rent": 60000,
+   "deposit": 360000,
+   "deposit_months": 6,
+   "escalation_pct": 10,
+   "notice_days": 90,
+   "deposit_refund_days": 30,
+   "dispute_city": "Coimbatore"
+  },
+  "risks": [],
+  "timeline": {
+   "Lock-in period ends": "2027-05-01",
+   "Agreement expires": "2029-05-01"
+  }
+ },
+ "NDA-1": {
+  "doc_type": "nda",
+  "clauses": [
+   "purpose",
+   "definitions",
+   "confidentiality",
+   "exclusions",
+   "term",
+   "return_of_info",
+   "liability_cap",
+   "disputes"
+  ],
+  "parties": [
+   "Zentrix Software Private Limited",
+   "Orbis Analytics LLP"
+  ],
+  "fields": {
+   "agreement_date": "2026-02-02",
+   "confidentiality": 3,
+   "non_compete_months": null,
+   "liability_capped": true,
+   "dispute_city": "Hyderabad"
+  },
+  "risks": [],
+  "timeline": {
+   "Confidentiality obligations end": "2031-02-02"
+  }
+ },
+ "NDA-2": {
+  "doc_type": "nda",
+  "clauses": [
+   "confidentiality",
+   "term",
+   "non_compete",
+   "indemnity",
+   "remedies",
+   "return_of_info"
+  ],
+  "parties": [
+   "Nimbus Retail Private Limited",
+   "Farah Sheikh"
+  ],
+  "fields": {
+   "agreement_date": "2026-07-15",
+   "confidentiality": "perpetual",
+   "non_compete_months": 24,
+   "liability_capped": false,
+   "dispute_city": null
+  },
+  "risks": [
+   "N1",
+   "N2",
+   "N4",
+   "N5"
+  ],
+  "timeline": {}
+ },
+ "NDA-3": {
+  "doc_type": "nda",
+  "clauses": [
+   "purpose",
+   "confidentiality",
+   "term",
+   "non_compete",
+   "liability_cap",
+   "disputes",
+   "notices"
+  ],
+  "parties": [
+   "Saffron Mobility Private Limited",
+   "Quill Design Studio"
+  ],
+  "fields": {
+   "agreement_date": "2025-09-10",
+   "confidentiality": 2,
+   "non_compete_months": 12,
+   "liability_capped": true,
+   "dispute_city": "Pune"
+  },
+  "risks": [],
+  "timeline": {
+   "Confidentiality obligations end": "2027-09-10"
+  }
+ },
+ "NOTICE-1": {
+  "doc_type": "legal_notice",
+  "clauses": [
+   "facts",
+   "facts",
+   "facts",
+   "demand",
+   "consequences"
+  ],
+  "fields": {
+   "advocate": "K. Venkatesh",
+   "client": "Thamarai Textiles",
+   "recipient": "Suresh Babu",
+   "notice_date": "2026-10-10",
+   "amount_demanded": 375000,
+   "interest_claimed": 24,
+   "compliance_days": 7
+  },
+  "risks": [
+   "D1",
+   "D4"
+  ],
+  "timeline": {
+   "Deadline to comply / reply": "2026-10-17"
+  }
+ },
+ "NOTICE-2": {
+  "doc_type": "legal_notice",
+  "clauses": [
+   "facts",
+   "facts",
+   "demand",
+   "consequences"
+  ],
+  "fields": {
+   "advocate": "R. Priya",
+   "client": "Vel Agencies",
+   "recipient": "P. Murugan",
+   "notice_date": "2026-09-02",
+   "amount_demanded": 150000,
+   "interest_claimed": null,
+   "compliance_days": 15
+  },
+  "risks": [
+   "D2",
+   "D3"
+  ],
+  "timeline": {
+   "Deadline to comply / reply": "2026-09-17"
+  }
+ },
+ "NOTICE-3": {
+  "doc_type": "legal_notice",
+  "clauses": [
+   "facts",
+   "facts",
+   "demand",
+   "consequences"
+  ],
+  "fields": {
+   "advocate": "A. Kavitha",
+   "client": "Lakshmi Ammal",
+   "recipient": "Rajesh Kumar",
+   "notice_date": "2026-10-01",
+   "amount_demanded": 75000,
+   "interest_claimed": null,
+   "compliance_days": 30
+  },
+  "risks": [],
+  "timeline": {
+   "Deadline to comply / reply": "2026-10-31"
+  }
+ }
+}

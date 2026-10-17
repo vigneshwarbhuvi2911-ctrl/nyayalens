@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      LLM_PROVIDER: mock
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Tesseract (OCR)
+        run: sudo apt-get update && sudo apt-get install -y tesseract-ocr
+      - run: pip install -r requirements-dev.txt
+      - name: Tests
+        run: python -m pytest
+      - name: Evaluation gate
+        run: python -m eval.run --gate --out eval/report.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: eval/report.md
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t nyayalens .
+      - name: Start container and analyse a scanned notice
+        run: |
+          docker run -d --name nyayalens -p 8000:8000 -e NYAYALENS_TODAY=2026-10-17 nyayalens
+          for i in $(seq 1 30); do curl -sf localhost:8000/health && break; sleep 2; done
+          curl -sf -F "file=@data/scanned/NOTICE-2-scanned.pdf" localhost:8000/analyze \
+            | python -c "import sys,json; r=json.load(sys.stdin); print(r['doc_type'], r['fields']['amount_demanded']['display']); assert r['ocr'] and r['doc_type']=='legal_notice'"

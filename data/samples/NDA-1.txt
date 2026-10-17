@@ -1,0 +1,29 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement is entered into with effect from 2 February 2026 (the "Effective Date") between Zentrix Software Private Limited, a company incorporated under the Companies Act, 2013, having its registered office at Plot 9, HITEC City, Hyderabad 500081 ("Zentrix"), and Orbis Analytics LLP, a limited liability partnership having its office at 301, Brigade Towers, Bengaluru 560001 ("Orbis"). Zentrix and Orbis are each a "Party".
+
+1. PURPOSE
+The Parties wish to evaluate a possible partnership for joint delivery of data analytics projects (the "Purpose") and, for that Purpose, may disclose confidential information to each other.
+
+2. CONFIDENTIAL INFORMATION
+"Confidential Information" means all non-public business, technical and financial information disclosed by one Party to the other, whether in writing, orally or electronically, that is marked confidential or would reasonably be understood to be confidential.
+
+3. OBLIGATIONS
+The receiving Party shall use the Confidential Information only for the Purpose, shall protect it with at least reasonable care, and shall not disclose it to any third party other than its employees and advisers who need to know it and are bound by similar obligations.
+
+4. EXCLUSIONS
+These obligations do not apply to information that is publicly available, already known to the receiving Party, independently developed, or required to be disclosed by law.
+
+5. TERM
+This Agreement shall remain in force for 2 years from the Effective Date, and the confidentiality obligations shall survive for 3 years after its expiry or termination.
+
+6. RETURN OF INFORMATION
+On written request, the receiving Party shall return or destroy all Confidential Information within 15 days.
+
+7. LIMITATION OF LIABILITY
+Neither Party shall be liable for any indirect or consequential loss, and each Party's total liability under this Agreement shall not exceed Rs. 25,00,000/-.
+
+8. GOVERNING LAW
+This Agreement is governed by the laws of India, and the courts at Hyderabad shall have exclusive jurisdiction.
+
+Signed for and on behalf of Zentrix and Orbis by their authorised signatories.
